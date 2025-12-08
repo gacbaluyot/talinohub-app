@@ -4,7 +4,7 @@ namespace App\Repositories;
 
 use App\Interfaces\AuthInterface;
 use Illuminate\Http\JsonResponse;
-use App\Helpers\UploadImage;
+use App\Helpers\UploadFiles;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
 use App\Http\Requests\UpdateProfileRequest;
@@ -60,7 +60,7 @@ class AuthRepository implements AuthInterface
         $user = Auth::user()->profile;
 
         $image = $request->hasFile('profile_picture')
-            ? (new UploadImage)->uploadImage('user_profile', $request->file('profile_picture'))
+            ? (new UploadFiles)->UploadFiles('user_profile', $request->file('profile_picture'))
             : null;
 
         $user->update([

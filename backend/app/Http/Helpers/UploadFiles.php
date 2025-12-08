@@ -4,7 +4,7 @@ namespace App\Helpers;
 
 use Illuminate\Support\Facades\Storage;
 
-class UploadImage
+class UploadFiles
 {
     public function uploadImage($path, $image)
     {
@@ -22,5 +22,18 @@ class UploadImage
         ];
 
         return $image;
+    }
+
+    public function uploadFiles($path, $file) 
+    {
+        // Generate a unique filename with timestamp and original extension
+        $filename = time().'_'.uniqid().'.'.$file->getClientOriginalExtension();
+        // Store the video in the videos directory within the public disk
+        $path = $file->storeAs($path, $filename, 'public');
+        // Prepare video data
+        return [
+            'filename' => $filename,
+            'path' => url(Storage::url($path)),
+        ];
     }
 }
