@@ -19,7 +19,7 @@ return new class extends Migration {
                 ->onDelete('cascade');
 
             $table->timestamp('liked_at')->useCurrent();
-
+            $table->timestampsTz();
             // Prevent duplicate likes
             $table->unique(['user_id', 'course_comment_id']);
         });

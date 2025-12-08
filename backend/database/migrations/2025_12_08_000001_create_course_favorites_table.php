@@ -19,7 +19,7 @@ return new class extends Migration {
                 ->onDelete('cascade');
 
             $table->timestamp('favorited_at')->useCurrent();
-
+            $table->timestampsTz();
             // Prevent duplicate favorites
             $table->unique(['user_id', 'course_id']);
         });
