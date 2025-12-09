@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
 
+/**
+ * @property mixed $thumbnail_path
+ */
 class Course extends Model
 {
     use HasFactory, SoftDeletes;

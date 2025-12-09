@@ -168,8 +168,7 @@ class DatabaseSeeder extends Seeder
                 'title' => $lessonData['title'],
                 'position' => $index + 1,
                 'type' => 'video',
-                'video_url' => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
-                'video_provider' => 'youtube',
+                'video_url' => 'lessons/video-' . ($index + 1) . '.mp4',
                 'duration_seconds' => $lessonData['duration'],
                 'is_preview' => $lessonData['is_preview'],
             ]);
@@ -190,8 +189,7 @@ class DatabaseSeeder extends Seeder
                 'title' => $lessonData['title'],
                 'position' => $index + 1,
                 'type' => 'video',
-                'video_url' => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
-                'video_provider' => 'youtube',
+                'video_url' => 'lessons/course2-video-' . ($index + 1) . '.mp4',
                 'duration_seconds' => $lessonData['duration'],
                 'is_preview' => $lessonData['is_preview'],
             ]);
@@ -211,8 +209,7 @@ class DatabaseSeeder extends Seeder
                 'title' => $lessonData['title'],
                 'position' => $index + 1,
                 'type' => 'video',
-                'video_url' => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
-                'video_provider' => 'youtube',
+                'video_url' => 'lessons/course3-video-' . ($index + 1) . '.mp4',
                 'duration_seconds' => $lessonData['duration'],
                 'is_preview' => $lessonData['is_preview'],
             ]);

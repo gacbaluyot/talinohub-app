@@ -4,21 +4,24 @@ namespace App\DTO;
 
 use Illuminate\Http\UploadedFile;
 
-class LessonDTO
+readonly class LessonDTO
 {
     public function __construct(
-        public readonly int $courseId,
-        public readonly string $title,
-        public readonly string $type,
-        public readonly ?string $slug = null,
-        public readonly ?int $position = null,
-        public readonly ?string $videoUrl = null,
-        public readonly ?string $videoProvider = null,
-        public readonly ?UploadedFile $document = null,
-        public readonly ?int $durationSeconds = null,
-        public readonly bool $isPreview = false,
+        public int           $courseId,
+        public string        $title,
+        public string        $type,
+        public ?string       $slug = null,
+        public ?int          $position = null,
+        public ?string       $videoUrl = null,
+        public ?UploadedFile $document = null,
+        public ?int          $durationSeconds = null,
+        public bool          $isPreview = false,
     ) {}
 
+    /**
+     * @param array $data
+     * @return self
+     */
     public static function fromRequest(array $data): self
     {
         return new self(
@@ -28,7 +31,6 @@ class LessonDTO
             slug: $data['slug'] ?? null,
             position: isset($data['position']) ? (int) $data['position'] : null,
             videoUrl: $data['video_url'] ?? null,
-            videoProvider: $data['video_provider'] ?? null,
             document: $data['document'] ?? null,
             durationSeconds: isset($data['duration_seconds']) ? (int) $data['duration_seconds'] : null,
             isPreview: $data['is_preview'] ?? false,
@@ -54,10 +56,6 @@ class LessonDTO
 
         if ($this->videoUrl !== null) {
             $data['video_url'] = $this->videoUrl;
-        }
-
-        if ($this->videoProvider !== null) {
-            $data['video_provider'] = $this->videoProvider;
         }
 
         if ($this->document !== null) {

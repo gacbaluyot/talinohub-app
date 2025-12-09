@@ -18,7 +18,6 @@ class Lesson extends Model
         'position',
         'type',
         'video_url',
-        'video_provider',
         'document_path',
         'duration_seconds',
         'is_preview',

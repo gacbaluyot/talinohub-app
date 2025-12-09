@@ -23,9 +23,8 @@ return new class extends Migration {
             // Type of lesson
             $table->enum('type', ['video', 'document']);
 
-            // For video lessons (either local file or external URL)
+            // For video lessons (stored in local storage)
             $table->string('video_url')->nullable();
-            $table->string('video_provider')->nullable(); // 'upload', 'youtube', etc.
 
             // For document lessons
             $table->string('document_path')->nullable();  // storage path

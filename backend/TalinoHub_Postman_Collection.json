@@ -1,0 +1,1055 @@
+{
+	"info": {
+		"_postman_id": "talinohub-api-collection",
+		"name": "TalinoHub API",
+		"description": "Complete API collection for TalinoHub Learning Management System",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{auth_token}}",
+				"type": "string"
+			}
+		]
+	},
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:8000/api",
+			"type": "string"
+		},
+		{
+			"key": "auth_token",
+			"value": "",
+			"type": "string"
+		}
+	],
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Register",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 200) {",
+									"    var jsonData = pm.response.json();",
+									"    pm.collectionVariables.set('auth_token', jsonData.data.token);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Test User\",\n  \"email\": \"test@example.com\",\n  \"password\": \"password123\",\n  \"password_confirmation\": \"password123\",\n  \"address\": \"123 Test Street\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/auth/register",
+							"host": ["{{base_url}}"],
+							"path": ["auth", "register"]
+						}
+					}
+				},
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 200) {",
+									"    var jsonData = pm.response.json();",
+									"    pm.collectionVariables.set('auth_token', jsonData.data.token);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"john.smith@example.com\",\n  \"password\": \"password123\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/auth/login",
+							"host": ["{{base_url}}"],
+							"path": ["auth", "login"]
+						}
+					}
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/auth/logout",
+							"host": ["{{base_url}}"],
+							"path": ["auth", "logout"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Courses",
+			"item": [
+				{
+					"name": "Public",
+					"item": [
+						{
+							"name": "Get Published Courses",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/courses/published",
+									"host": ["{{base_url}}"],
+									"path": ["courses", "published"]
+								}
+							}
+						},
+						{
+							"name": "Get Course by ID",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/courses/1",
+									"host": ["{{base_url}}"],
+									"path": ["courses", "1"]
+								}
+							}
+						},
+						{
+							"name": "Get Course by Slug",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/courses/complete-web-development-bootcamp-2025",
+									"host": ["{{base_url}}"],
+									"path": ["courses", "complete-web-development-bootcamp-2025"]
+								}
+							}
+						},
+						{
+							"name": "Get Courses by Category",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/courses/category/Web Development",
+									"host": ["{{base_url}}"],
+									"path": ["courses", "category", "Web Development"]
+								}
+							}
+						},
+						{
+							"name": "Get Courses by Level",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/courses/level/Beginner",
+									"host": ["{{base_url}}"],
+									"path": ["courses", "level", "Beginner"]
+								}
+							}
+						},
+						{
+							"name": "Get Courses by Educator",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/courses/educator/1",
+									"host": ["{{base_url}}"],
+									"path": ["courses", "educator", "1"]
+								}
+							}
+						}
+					]
+				},
+				{
+					"name": "Authenticated",
+					"item": [
+						{
+							"name": "Get My Courses",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/courses",
+									"host": ["{{base_url}}"],
+									"path": ["courses"]
+								}
+							}
+						},
+						{
+							"name": "Create Course",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"title\": \"Introduction to TypeScript\",\n  \"short_description\": \"Learn TypeScript from scratch\",\n  \"description\": \"Complete guide to TypeScript programming. Learn types, interfaces, generics and more.\",\n  \"is_free\": true,\n  \"price\": 0,\n  \"category\": \"Programming\",\n  \"level\": \"Beginner\",\n  \"language\": \"English\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/courses",
+									"host": ["{{base_url}}"],
+									"path": ["courses"]
+								}
+							}
+						},
+						{
+							"name": "Update Course",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"title\": \"Updated Course Title\",\n  \"price\": 79.99,\n  \"is_free\": false\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/courses/1",
+									"host": ["{{base_url}}"],
+									"path": ["courses", "1"]
+								}
+							}
+						},
+						{
+							"name": "Delete Course",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/courses/1",
+									"host": ["{{base_url}}"],
+									"path": ["courses", "1"]
+								}
+							}
+						},
+						{
+							"name": "Publish Course",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/courses/1/publish",
+									"host": ["{{base_url}}"],
+									"path": ["courses", "1", "publish"]
+								}
+							}
+						},
+						{
+							"name": "Unpublish Course",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/courses/1/unpublish",
+									"host": ["{{base_url}}"],
+									"path": ["courses", "1", "unpublish"]
+								}
+							}
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Lessons",
+			"item": [
+				{
+					"name": "Public",
+					"item": [
+						{
+							"name": "Get Lessons by Course (Public)",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/lessons/course/1",
+									"host": ["{{base_url}}"],
+									"path": ["lessons", "course", "1"]
+								},
+								"description": "Returns all lessons for free courses, only preview lessons for paid courses"
+							}
+						},
+						{
+							"name": "Get Preview Lessons",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/lessons/course/1/preview",
+									"host": ["{{base_url}}"],
+									"path": ["lessons", "course", "1", "preview"]
+								}
+							}
+						},
+						{
+							"name": "Get Lesson by ID",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/lessons/1",
+									"host": ["{{base_url}}"],
+									"path": ["lessons", "1"]
+								}
+							}
+						}
+					]
+				},
+				{
+					"name": "Authenticated",
+					"item": [
+						{
+							"name": "Get All My Lessons",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/lessons",
+									"host": ["{{base_url}}"],
+									"path": ["lessons"]
+								}
+							}
+						},
+						{
+							"name": "Get Enrolled Course Lessons",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/lessons/enrolled/course/1",
+									"host": ["{{base_url}}"],
+									"path": ["lessons", "enrolled", "course", "1"]
+								},
+								"description": "Returns all lessons for enrolled users regardless of course price"
+							}
+						},
+						{
+							"name": "Create Lesson",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"course_id\": 1,\n  \"title\": \"Advanced CSS Techniques\",\n  \"type\": \"video\",\n  \"video_url\": \"lessons/advanced-css.mp4\",\n  \"duration_seconds\": 1200,\n  \"is_preview\": false\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/lessons",
+									"host": ["{{base_url}}"],
+									"path": ["lessons"]
+								}
+							}
+						},
+						{
+							"name": "Update Lesson",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"title\": \"Updated Lesson Title\",\n  \"is_preview\": true\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/lessons/1",
+									"host": ["{{base_url}}"],
+									"path": ["lessons", "1"]
+								}
+							}
+						},
+						{
+							"name": "Delete Lesson",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/lessons/1",
+									"host": ["{{base_url}}"],
+									"path": ["lessons", "1"]
+								}
+							}
+						},
+						{
+							"name": "Reorder Lessons",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"positions\": {\n    \"1\": 2,\n    \"2\": 1,\n    \"3\": 3\n  }\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/lessons/course/1/reorder",
+									"host": ["{{base_url}}"],
+									"path": ["lessons", "course", "1", "reorder"]
+								}
+							}
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Enrollments",
+			"item": [
+				{
+					"name": "Enroll in Course",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"course_id\": 1\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/enrollments/enroll",
+							"host": ["{{base_url}}"],
+							"path": ["enrollments", "enroll"]
+						}
+					}
+				},
+				{
+					"name": "Unenroll from Course",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/enrollments/courses/1",
+							"host": ["{{base_url}}"],
+							"path": ["enrollments", "courses", "1"]
+						}
+					}
+				},
+				{
+					"name": "Get My Enrollments",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/enrollments/my-courses",
+							"host": ["{{base_url}}"],
+							"path": ["enrollments", "my-courses"]
+						}
+					}
+				},
+				{
+					"name": "Get Course Students",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/enrollments/courses/1/students",
+							"host": ["{{base_url}}"],
+							"path": ["enrollments", "courses", "1", "students"]
+						}
+					}
+				},
+				{
+					"name": "Update Course Progress",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"progress\": 75\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/enrollments/courses/1/progress",
+							"host": ["{{base_url}}"],
+							"path": ["enrollments", "courses", "1", "progress"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Favorites",
+			"item": [
+				{
+					"name": "Add to Favorites",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/favorites/courses/1",
+							"host": ["{{base_url}}"],
+							"path": ["favorites", "courses", "1"]
+						}
+					}
+				},
+				{
+					"name": "Remove from Favorites",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/favorites/courses/1",
+							"host": ["{{base_url}}"],
+							"path": ["favorites", "courses", "1"]
+						}
+					}
+				},
+				{
+					"name": "Get My Favorites",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/favorites/my-favorites",
+							"host": ["{{base_url}}"],
+							"path": ["favorites", "my-favorites"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Ratings",
+			"item": [
+				{
+					"name": "Public",
+					"item": [
+						{
+							"name": "Get Course Ratings",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/ratings/courses/1",
+									"host": ["{{base_url}}"],
+									"path": ["ratings", "courses", "1"]
+								}
+							}
+						}
+					]
+				},
+				{
+					"name": "Authenticated",
+					"item": [
+						{
+							"name": "Rate Course",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"rating\": 5,\n  \"review\": \"Excellent course! Learned so much. The instructor explains everything clearly and the projects are very practical.\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/ratings/courses/1",
+									"host": ["{{base_url}}"],
+									"path": ["ratings", "courses", "1"]
+								}
+							}
+						},
+						{
+							"name": "Update Rating",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"rating\": 4,\n  \"review\": \"Updated review: Still a great course, but could use more advanced topics.\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/ratings/courses/1",
+									"host": ["{{base_url}}"],
+									"path": ["ratings", "courses", "1"]
+								},
+								"description": "Same endpoint as Rate Course - will update if rating exists"
+							}
+						},
+						{
+							"name": "Delete Rating",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/ratings/courses/1",
+									"host": ["{{base_url}}"],
+									"path": ["ratings", "courses", "1"]
+								}
+							}
+						},
+						{
+							"name": "Get My Rating",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/ratings/courses/1/my-rating",
+									"host": ["{{base_url}}"],
+									"path": ["ratings", "courses", "1", "my-rating"]
+								}
+							}
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Comments",
+			"item": [
+				{
+					"name": "Public",
+					"item": [
+						{
+							"name": "Get Course Comments",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/comments/courses/1",
+									"host": ["{{base_url}}"],
+									"path": ["comments", "courses", "1"]
+								},
+								"description": "Returns top-level comments with nested replies"
+							}
+						}
+					]
+				},
+				{
+					"name": "Authenticated",
+					"item": [
+						{
+							"name": "Post Comment",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"comment\": \"This is a great course! Just finished the first section.\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/comments/courses/1",
+									"host": ["{{base_url}}"],
+									"path": ["comments", "courses", "1"]
+								}
+							}
+						},
+						{
+							"name": "Post Reply",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"comment\": \"Thanks for the feedback! Glad you're enjoying it.\",\n  \"parent_id\": 1\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/comments/courses/1",
+									"host": ["{{base_url}}"],
+									"path": ["comments", "courses", "1"]
+								}
+							}
+						},
+						{
+							"name": "Update Comment",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"comment\": \"Updated comment text\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/comments/1",
+									"host": ["{{base_url}}"],
+									"path": ["comments", "1"]
+								}
+							}
+						},
+						{
+							"name": "Delete Comment",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/comments/1",
+									"host": ["{{base_url}}"],
+									"path": ["comments", "1"]
+								}
+							}
+						},
+						{
+							"name": "Get My Comments",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/comments/my-comments",
+									"host": ["{{base_url}}"],
+									"path": ["comments", "my-comments"]
+								}
+							}
+						},
+						{
+							"name": "Like Comment",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/comments/1/like",
+									"host": ["{{base_url}}"],
+									"path": ["comments", "1", "like"]
+								}
+							}
+						},
+						{
+							"name": "Unlike Comment",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/comments/1/like",
+									"host": ["{{base_url}}"],
+									"path": ["comments", "1", "like"]
+								}
+							}
+						}
+					]
+				}
+			]
+		}
+	]
+}

@@ -4,21 +4,21 @@ namespace App\DTO;
 
 use Illuminate\Http\UploadedFile;
 
-class CourseDTO
+readonly class CourseDTO
 {
     public function __construct(
-        public readonly int $userId,
-        public readonly string $title,
-        public readonly ?string $slug = null,
-        public readonly ?string $shortDescription = null,
-        public readonly ?string $description = null,
-        public readonly bool $isFree = true,
-        public readonly ?float $price = null,
-        public readonly ?UploadedFile $thumbnail = null,
-        public readonly ?string $category = null,
-        public readonly ?string $level = null,
-        public readonly ?string $language = null,
-        public readonly bool $isPublished = false,
+        public int           $userId,
+        public string        $title,
+        public ?string       $slug = null,
+        public ?string       $shortDescription = null,
+        public ?string       $description = null,
+        public bool          $isFree = true,
+        public ?float        $price = null,
+        public ?UploadedFile $thumbnail = null,
+        public ?string       $category = null,
+        public ?string       $level = null,
+        public ?string       $language = null,
+        public bool          $isPublished = false,
     ) {}
 
     public static function fromRequest(array $data): self
