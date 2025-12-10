@@ -81,6 +81,14 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/{commentId}/like', [App\Http\Controllers\API\CommentController::class, 'like']);
         Route::delete('/{commentId}/like', [App\Http\Controllers\API\CommentController::class, 'unlike']);
     });
+
+    Route::prefix('blogs')->group(function () {
+        Route::get('/', [App\Http\Controllers\API\BlogController::class, 'index']);
+        Route::post('/', [App\Http\Controllers\API\BlogController::class, 'store']);
+        Route::get('/{uuid}', [App\Http\Controllers\API\BlogController::class, 'show']);
+        Route::put('/{uuid}', [App\Http\Controllers\API\BlogController::class, 'update']);
+        Route::delete('/{uuid}', [App\Http\Controllers\API\BlogController::class, 'destroy']);
+    });
 });
 
 // Public Rating Routes
