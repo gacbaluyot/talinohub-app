@@ -41,7 +41,7 @@ class AuthController extends Controller
 
     public function register(RegisterRequest $request)
     {
-         $user = User::create([
+        $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
@@ -50,7 +50,7 @@ class AuthController extends Controller
 
         $bearerToken = $user->createToken($user)->plainTextToken;
 
-        return response()->json(['message' => 'User registered successfully', 'access_token' => $bearerToken], 201);
+        return response()->json(['message' => 'User registered successfully', 'access_token' => $bearerToken, 'user' => $user], 201);
     }
 
     public function updateUserProfile(UpdateProfileRequest $request)
