@@ -154,7 +154,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import { useAuthStore } from '~/stores/auth'
-import type { LoginRequest } from '~/models/auth'
+import type { LoginRequest } from '~/types/auth'
 
 definePageMeta({
   middleware: 'guest'

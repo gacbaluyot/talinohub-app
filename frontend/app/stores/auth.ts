@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import axios, { AxiosError } from 'axios'
-import type { LoginRequest, LoginResponse, RegisterRequest, RegisterResponse, User, ErrorResponse, AuthState } from '~/models/auth'
+import type { LoginRequest, LoginResponse, RegisterRequest, RegisterResponse, User, ErrorResponse, AuthState } from '~/types/auth'
 import Cookies from 'js-cookie'
 
 export const useAuthStore = defineStore('auth', {
