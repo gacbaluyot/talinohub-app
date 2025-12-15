@@ -3,17 +3,17 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreBlogRequest;
-use App\Http\Requests\UpdateBlogRequest;
-use App\Repositories\Contracts\BlogRepositoryInterface;
+use App\Http\Requests\Blog\StoreBlogRequest;
+use App\Http\Requests\Blog\UpdateBlogRequest;
+use App\Repositories\BlogRepository;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Str;
 
 class BlogController extends Controller
 {
-    protected BlogRepositoryInterface $blogRepository;
+    protected BlogRepository $blogRepository;
 
-    public function __construct(BlogRepositoryInterface $blogRepository)
+    public function __construct(BlogRepository $blogRepository)
     {
         $this->blogRepository = $blogRepository;
     }
@@ -39,7 +39,7 @@ class BlogController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Blog created successfully',
-            'data' => $blog
+            'data' => $blog->load('user')
         ], 201);
     }
 
@@ -83,7 +83,7 @@ class BlogController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Blog updated successfully',
-            'data' => $blog->fresh()
+            'data' => $blog->fresh()->load('user')
         ]);
     }
 
