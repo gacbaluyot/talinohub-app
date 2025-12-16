@@ -16,17 +16,17 @@ class BlogRepository implements BlogRepositoryInterface
 
     public function paginate(int $perPage = 15): LengthAwarePaginator
     {
-        return Blog::with('user')->paginate($perPage);
+        return Blog::with("user")->paginate($perPage);
     }
 
     public function find(int $id): ?Blog
     {
-        return Blog::find($id);
+        return Blog::findorFail($id);
     }
 
     public function findByUuid(string $uuid): ?Blog
     {
-        return Blog::where('uuid', $uuid)->first();
+        return Blog::where("uuid", $uuid)->first();
     }
 
     public function store(array $data): Blog
@@ -37,7 +37,7 @@ class BlogRepository implements BlogRepositoryInterface
     public function update(int $id, array $data): bool
     {
         $blog = $this->find($id);
-        
+
         if (!$blog) {
             return false;
         }
@@ -48,7 +48,7 @@ class BlogRepository implements BlogRepositoryInterface
     public function delete(int $id): bool
     {
         $blog = $this->find($id);
-        
+
         if (!$blog) {
             return false;
         }
