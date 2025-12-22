@@ -184,8 +184,21 @@ const handleLogin = async (): Promise<void> => {
 
     await authStore.login(credentials)
     
-    // Redirect to dashboard on success (replace to prevent back)
-    await navigateTo('/dashboard', { replace: true })
+    // Redirect based on user role
+    const primaryRole = authStore.primaryRole
+    
+    let redirectPath = '/dashboard'
+    
+    if (primaryRole === 'admin') {
+      redirectPath = '/admin'
+    } else if (primaryRole === 'educator') {
+      redirectPath = '/educator'
+    } else if (primaryRole === 'student') {
+      redirectPath = '/student'
+    }
+    
+    // Redirect to appropriate dashboard (replace to prevent back)
+    await navigateTo(redirectPath, { replace: true })
     
   } catch (err) {
     // Error is already handled in the store

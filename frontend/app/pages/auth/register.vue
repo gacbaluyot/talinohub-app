@@ -188,8 +188,21 @@ const handleRegister = async (): Promise<void> => {
 
     await authStore.register(credentials)
     
-    // Redirect to dashboard on success (replace to prevent back)
-    await navigateTo('/dashboard', { replace: true })
+    // Redirect based on user role (new users get 'student' role by default)
+    const primaryRole = authStore.primaryRole
+    
+    let redirectPath = '/student' // Default for new registrations
+    
+    if (primaryRole === 'admin') {
+      redirectPath = '/admin'
+    } else if (primaryRole === 'educator') {
+      redirectPath = '/educator'
+    } else if (primaryRole === 'student') {
+      redirectPath = '/student'
+    }
+    
+    // Redirect to appropriate dashboard (replace to prevent back)
+    await navigateTo(redirectPath, { replace: true })
     
   } catch (err) {
     // Error is already handled in the store

@@ -1,4 +1,5 @@
 import axios from 'axios'
+import Cookies from 'js-cookie'
 
 export default defineNuxtPlugin(() => {
   // Set default headers
@@ -16,11 +17,9 @@ export default defineNuxtPlugin(() => {
       config.url = `${apiUrl}${config.url}`
       
       // Add auth token if it exists
-      if (import.meta.client) {
-        const token = localStorage.getItem('token')
-        if (token) {
-          config.headers.Authorization = `Bearer ${token}`
-        }
+      const token = Cookies.get('access_token')
+      if (token) {
+        config.headers.Authorization = `Bearer ${token}`
       }
       
       return config
@@ -39,11 +38,10 @@ export default defineNuxtPlugin(() => {
       // Handle 401 Unauthorized
       if (error.response?.status === 401) {
         // Clear auth and redirect to login
-        if (import.meta.client) {
-          localStorage.removeItem('token')
-          localStorage.removeItem('user')
-          window.location.href = '/auth/login'
-        }
+        Cookies.remove('access_token')
+        Cookies.remove('user')
+        Cookies.remove('roles')
+        window.location.href = '/auth/login'
       }
       
       // Handle 403 Forbidden

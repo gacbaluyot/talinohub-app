@@ -14,7 +14,7 @@ class AuthController extends Controller
 {
     public function login(LoginRequest $request)
     {
-        $user = User::where('email', $request->input('email'))->firstOrFail();
+        $user = User::where('email', $request->input('email'))->with('roles')->firstOrFail();
 
         if (! Hash::check($request->input('password'), $user->password)) {
             return response()->json(['message' => 'Invalid credentials'], 401);
@@ -23,12 +23,15 @@ class AuthController extends Controller
         $user->tokens()->delete();
         $bearerToken = $user->createToken($user)->plainTextToken;
 
+        // Get user roles
+        $roles = $user->roles->pluck('slug')->toArray();
 
         return response()->json(
             [
                 'message' => 'User logged in successfully',
                 'access_token' => $bearerToken,
                 'user' => $user,
+                'roles' => $roles,
             ], 200);
     }
 
@@ -48,9 +51,21 @@ class AuthController extends Controller
             'address' => $request->address,
         ]);
 
+        // Assign default student role
+        $user->assignRole('student');
+
         $bearerToken = $user->createToken($user)->plainTextToken;
 
-        return response()->json(['message' => 'User registered successfully', 'access_token' => $bearerToken, 'user' => $user], 201);
+        // Load roles for response
+        $user->load('roles');
+        $roles = $user->roles->pluck('slug')->toArray();
+
+        return response()->json([
+            'message' => 'User registered successfully',
+            'access_token' => $bearerToken,
+            'user' => $user,
+            'roles' => $roles
+        ], 201);
     }
 
     public function updateUserProfile(UpdateProfileRequest $request)

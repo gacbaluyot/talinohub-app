@@ -9,6 +9,7 @@ export interface LoginRequest {
 export interface LoginResponse {
   access_token: string
   user: User
+  roles: string[]
 }
 
 // User interface
@@ -33,6 +34,7 @@ export interface RegisterRequest {
 export interface RegisterResponse {
   access_token: string
   user: User
+  roles: string[]
 }
 
 // Error Response
@@ -45,12 +47,7 @@ export interface ErrorResponse {
 export interface AuthState {
   user: User | null
   token: string | null
-  isAuthenticated: boolean
-}
- 
-export interface AuthState {
-  user: User | null
-  token: string | null
+  roles: string[]
   isAuthenticated: boolean
   loading: boolean
   error: string | null

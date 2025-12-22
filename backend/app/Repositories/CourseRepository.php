@@ -30,6 +30,11 @@ class CourseRepository implements CourseRepositoryInterface
         return $this->model->with(['educator', 'lessons'])->find($id);
     }
 
+    public function findById(int $id): ?Course
+    {
+        return $this->find($id);
+    }
+
     public function findBySlug(string $slug): ?Course
     {
         return $this->model->with(['educator', 'lessons'])
