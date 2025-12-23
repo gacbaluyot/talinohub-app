@@ -101,9 +101,14 @@
 
       <!-- Actions -->
       <div class="flex items-center justify-between gap-4 pt-6 border-t border-gray-200">
-        <BaseButton variant="secondary" @click="$emit('close')">
-          Close
-        </BaseButton>
+        <div class="flex items-center gap-3">
+          <BaseButton variant="secondary" @click="$emit('close')">
+            Close
+          </BaseButton>
+          <BaseButton variant="outline" @click="handleViewFullDetails">
+            View Full Details
+          </BaseButton>
+        </div>
         <BaseButton
           v-if="!enrolled"
           variant="primary"
@@ -213,7 +218,17 @@ const handleEnroll = () => {
 
 const handleContinue = () => {
   // Navigate to course learning page
-  emit('close')
+  if (props.courseId) {
+    navigateTo(`/student/courses/${props.courseId}`)
+    emit('close')
+  }
+}
+
+const handleViewFullDetails = () => {
+  if (props.courseId) {
+    navigateTo(`/student/courses/${props.courseId}`)
+    emit('close')
+  }
 }
 
 watch(() => props.show, (newVal) => {

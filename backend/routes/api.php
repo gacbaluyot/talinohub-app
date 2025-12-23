@@ -51,19 +51,21 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // Enrollment Management
     Route::prefix('enrollments')->group(function () {
+        Route::post('/', [App\Http\Controllers\API\EnrollmentController::class, 'enroll']);
         Route::post('/enroll', [App\Http\Controllers\API\EnrollmentController::class, 'enroll']);
+        Route::delete('/{courseId}', [App\Http\Controllers\API\EnrollmentController::class, 'unenroll']);
         Route::delete('/courses/{courseId}', [App\Http\Controllers\API\EnrollmentController::class, 'unenroll']);
+        Route::get('/my-enrollments', [App\Http\Controllers\API\EnrollmentController::class, 'myEnrollments']);
         Route::get('/my-courses', [App\Http\Controllers\API\EnrollmentController::class, 'myEnrollments']);
         Route::get('/courses/{courseId}/students', [App\Http\Controllers\API\EnrollmentController::class, 'courseStudents']);
+        Route::put('/{courseId}/progress', [App\Http\Controllers\API\EnrollmentController::class, 'updateProgress']);
         Route::put('/courses/{courseId}/progress', [App\Http\Controllers\API\EnrollmentController::class, 'updateProgress']);
-    });
-
-    // Favorites Management
-    Route::prefix('favorites')->group(function () {
-        Route::post('/courses/{courseId}', [App\Http\Controllers\API\EnrollmentController::class, 'addToFavorites']);
-        Route::delete('/courses/{courseId}', [App\Http\Controllers\API\EnrollmentController::class, 'removeFromFavorites']);
+        Route::post('/{courseId}/favorite', [App\Http\Controllers\API\EnrollmentController::class, 'addToFavorites']);
+        Route::delete('/{courseId}/favorite', [App\Http\Controllers\API\EnrollmentController::class, 'removeFromFavorites']);
         Route::get('/my-favorites', [App\Http\Controllers\API\EnrollmentController::class, 'myFavorites']);
     });
+
+
 
     // Ratings Management
     Route::prefix('ratings')->group(function () {

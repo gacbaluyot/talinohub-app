@@ -1,6 +1,6 @@
 <template>
-  <aside class="w-64 bg-white border-r border-gray-200 min-h-screen sticky top-16">
-    <nav class="px-3 py-6 space-y-1">
+  <aside class="w-64 bg-background min-h-screen sticky top-16">
+    <nav class="px-3 py-4 space-y-0.5">
       <a
         v-for="item in navigation"
         :key="item.name"
@@ -8,23 +8,23 @@
         @click.prevent="handleNavigate(item.href)"
         :class="[
           item.current
-            ? 'bg-indigo-50 text-indigo-600'
-            : 'text-gray-700 hover:bg-gray-50 hover:text-indigo-600',
-          'group flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors'
+            ? 'bg-accent text-accent-foreground'
+            : 'text-muted-foreground hover:bg-accent/50 hover:text-accent-foreground',
+          'group flex items-center px-3 py-2 text-sm font-medium rounded-lg transition-colors'
         ]"
       >
         <component
           :is="item.icon"
           :class="[
-            item.current ? 'text-indigo-600' : 'text-gray-400 group-hover:text-indigo-600',
-            'mr-3 flex-shrink-0 h-5 w-5'
+            item.current ? 'text-accent-foreground' : 'text-muted-foreground group-hover:text-accent-foreground',
+            'mr-3 flex-shrink-0 h-4 w-4'
           ]"
         />
         {{ item.name }}
         <span
           v-if="item.badge"
           :class="[
-            item.current ? 'bg-indigo-600 text-white' : 'bg-gray-200 text-gray-600',
+            item.current ? 'bg-primary text-primary-foreground' : 'bg-muted text-muted-foreground',
             'ml-auto inline-block py-0.5 px-2 text-xs rounded-full'
           ]"
         >
@@ -34,16 +34,16 @@
     </nav>
 
     <!-- Quick Actions -->
-    <div class="px-3 py-6 border-t border-gray-200">
-      <h3 class="px-3 text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3">
+    <div class="px-3 py-4 mt-4">
+      <h3 class="px-3 text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">
         Quick Actions
       </h3>
-      <div class="space-y-2">
+      <div class="space-y-0.5">
         <button
           @click="emit('create-course')"
-          class="w-full flex items-center px-3 py-2 text-sm font-medium text-indigo-600 hover:bg-indigo-50 rounded-md transition-colors"
+          class="w-full flex items-center px-3 py-2 text-sm font-medium text-foreground hover:bg-accent/50 rounded-lg transition-colors"
         >
-          <svg class="mr-3 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg class="mr-3 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
           </svg>
           New Course

@@ -10,7 +10,7 @@
         leave-from="opacity-100"
         leave-to="opacity-0"
       >
-        <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
+        <div class="fixed inset-0 bg-background/80 backdrop-blur-sm transition-opacity" />
       </TransitionChild>
 
       <div class="fixed inset-0 z-10 overflow-y-auto">
@@ -24,71 +24,71 @@
             leave-from="opacity-100 translate-y-0 sm:scale-100"
             leave-to="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
           >
-            <DialogPanel class="relative transform overflow-hidden rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-2xl sm:p-6">
+            <DialogPanel class="relative transform overflow-hidden rounded-lg bg-card border border-border px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-2xl sm:p-6">
               <div v-if="loadingCourse" class="text-center py-8">
-                <div class="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-indigo-600 border-r-transparent"></div>
-                <p class="mt-2 text-sm text-gray-600">Loading course...</p>
+                <div class="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-primary border-r-transparent"></div>
+                <p class="mt-2 text-sm text-muted-foreground">Loading course...</p>
               </div>
 
               <div v-else>
-                <DialogTitle as="h3" class="text-lg font-semibold leading-6 text-gray-900 mb-4">
+                <DialogTitle as="h3" class="text-lg font-semibold leading-6 text-card-foreground mb-4">
                   Update Course
                 </DialogTitle>
 
                 <form @submit.prevent="handleSubmit" class="space-y-4">
                   <!-- Title -->
                   <div>
-                    <label for="title" class="block text-sm font-medium text-gray-700">Course Title *</label>
+                    <label for="title" class="block text-sm font-medium text-foreground">Course Title *</label>
                     <input
                       v-model="formData.title"
                       type="text"
                       id="title"
                       required
-                      class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                      class="mt-1 block w-full rounded-md border-input bg-background text-foreground shadow-sm focus:border-ring focus:ring-ring sm:text-sm"
                     />
                   </div>
 
                   <!-- Short Description -->
                   <div>
-                    <label for="short_description" class="block text-sm font-medium text-gray-700">Short Description</label>
+                    <label for="short_description" class="block text-sm font-medium text-foreground">Short Description</label>
                     <input
                       v-model="formData.short_description"
                       type="text"
                       id="short_description"
                       maxlength="500"
-                      class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                      class="mt-1 block w-full rounded-md border-input bg-background text-foreground shadow-sm focus:border-ring focus:ring-ring sm:text-sm"
                     />
                   </div>
 
                   <!-- Description -->
                   <div>
-                    <label for="description" class="block text-sm font-medium text-gray-700">Full Description</label>
+                    <label for="description" class="block text-sm font-medium text-foreground">Full Description</label>
                     <textarea
                       v-model="formData.description"
                       id="description"
                       rows="4"
-                      class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                      class="mt-1 block w-full rounded-md border-input bg-background text-foreground shadow-sm focus:border-ring focus:ring-ring sm:text-sm"
                     />
                   </div>
 
                   <!-- Category & Level -->
                   <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
                     <div>
-                      <label for="category" class="block text-sm font-medium text-gray-700">Category</label>
+                      <label for="category" class="block text-sm font-medium text-foreground">Category</label>
                       <input
                         v-model="formData.category"
                         type="text"
                         id="category"
-                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                        class="mt-1 block w-full rounded-md border-input bg-background text-foreground shadow-sm focus:border-ring focus:ring-ring sm:text-sm"
                       />
                     </div>
 
                     <div>
-                      <label for="level" class="block text-sm font-medium text-gray-700">Level</label>
+                      <label for="level" class="block text-sm font-medium text-foreground">Level</label>
                       <select
                         v-model="formData.level"
                         id="level"
-                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                        class="mt-1 block w-full rounded-md border-input bg-background text-foreground shadow-sm focus:border-ring focus:ring-ring sm:text-sm"
                       >
                         <option value="">Select level</option>
                         <option value="beginner">Beginner</option>
@@ -100,12 +100,12 @@
 
                   <!-- Language -->
                   <div>
-                    <label for="language" class="block text-sm font-medium text-gray-700">Language</label>
+                    <label for="language" class="block text-sm font-medium text-foreground">Language</label>
                     <input
                       v-model="formData.language"
                       type="text"
                       id="language"
-                      class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                      class="mt-1 block w-full rounded-md border-input bg-background text-foreground shadow-sm focus:border-ring focus:ring-ring sm:text-sm"
                     />
                   </div>
 
@@ -116,35 +116,35 @@
                         v-model="formData.is_free"
                         type="checkbox"
                         id="is_free"
-                        class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                        class="h-4 w-4 rounded border-input text-primary focus:ring-ring"
                       />
-                      <label for="is_free" class="ml-2 block text-sm text-gray-700">This is a free course</label>
+                      <label for="is_free" class="ml-2 block text-sm text-foreground">This is a free course</label>
                     </div>
                     
                     <div v-if="!formData.is_free">
-                      <label for="price" class="block text-sm font-medium text-gray-700">Price ($)</label>
+                      <label for="price" class="block text-sm font-medium text-foreground">Price ($)</label>
                       <input
                         v-model.number="formData.price"
                         type="number"
                         id="price"
                         step="0.01"
                         min="0"
-                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                        class="mt-1 block w-full rounded-md border-input bg-background text-foreground shadow-sm focus:border-ring focus:ring-ring sm:text-sm"
                       />
                     </div>
                   </div>
 
                   <!-- Thumbnail -->
                   <div>
-                    <label for="thumbnail" class="block text-sm font-medium text-gray-700">Course Thumbnail</label>
+                    <label for="thumbnail" class="block text-sm font-medium text-foreground">Course Thumbnail</label>
                     <input
                       type="file"
                       id="thumbnail"
                       accept="image/*"
                       @change="handleThumbnailChange"
-                      class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100"
+                      class="mt-1 block w-full text-sm text-muted-foreground file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-primary/10 file:text-primary hover:file:bg-primary/20"
                     />
-                    <p class="mt-1 text-xs text-gray-500">Leave empty to keep current thumbnail</p>
+                    <p class="mt-1 text-xs text-muted-foreground">Leave empty to keep current thumbnail</p>
                   </div>
 
                   <!-- Published -->
@@ -153,14 +153,14 @@
                       v-model="formData.is_published"
                       type="checkbox"
                       id="is_published"
-                      class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                      class="h-4 w-4 rounded border-input text-primary focus:ring-ring"
                     />
-                    <label for="is_published" class="ml-2 block text-sm text-gray-700">Published</label>
+                    <label for="is_published" class="ml-2 block text-sm text-foreground">Published</label>
                   </div>
 
                   <!-- Error Message -->
-                  <div v-if="error" class="rounded-md bg-red-50 p-4">
-                    <p class="text-sm text-red-800">{{ error }}</p>
+                  <div v-if="error" class="rounded-md bg-destructive/10 border border-destructive/20 p-4">
+                    <p class="text-sm text-destructive">{{ error }}</p>
                   </div>
 
                   <!-- Actions -->
@@ -168,11 +168,11 @@
                     <button
                       type="submit"
                       :disabled="loading"
-                      class="inline-flex w-full justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 sm:col-start-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                      class="inline-flex w-full justify-center rounded-md bg-primary px-3 py-2 text-sm font-semibold text-primary-foreground shadow-sm hover:bg-primary/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring sm:col-start-2 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       <span v-if="!loading">Update Course</span>
                       <span v-else class="flex items-center">
-                        <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-primary-foreground" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                           <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                           <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                         </svg>
@@ -183,7 +183,7 @@
                       type="button"
                       @click="handleClose"
                       :disabled="loading"
-                      class="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:col-start-1 sm:mt-0 disabled:opacity-50 disabled:cursor-not-allowed"
+                      class="mt-3 inline-flex w-full justify-center rounded-md bg-background px-3 py-2 text-sm font-semibold text-foreground shadow-sm ring-1 ring-inset ring-border hover:bg-accent sm:col-start-1 sm:mt-0 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       Cancel
                     </button>

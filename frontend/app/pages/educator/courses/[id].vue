@@ -108,6 +108,13 @@
                 </div>
                 <div class="flex items-center gap-2">
                   <button
+                    @click="navigateTo(`/educator/courses/preview/${courseId}`)"
+                    class="inline-flex items-center rounded-md bg-white px-4 py-2 text-sm font-semibold text-blue-600 shadow-sm ring-1 ring-inset ring-blue-300 hover:bg-blue-50 transition-colors"
+                  >
+                    <EyeIcon class="h-5 w-5 mr-2" />
+                    Preview as Student
+                  </button>
+                  <button
                     @click="handleEditCourse"
                     class="inline-flex items-center rounded-md bg-white px-4 py-2 text-sm font-semibold text-indigo-600 shadow-sm ring-1 ring-inset ring-indigo-300 hover:bg-indigo-50 transition-colors"
                   >
@@ -318,7 +325,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
-import { PencilSquareIcon, TrashIcon } from '@heroicons/vue/24/outline'
+import { PencilSquareIcon, TrashIcon, EyeIcon } from '@heroicons/vue/24/outline'
 import DashboardHeader from '~/components/layout/DashboardHeader.vue'
 import DashboardSidebar from '~/components/layout/DashboardSidebar.vue'
 import UpdateCourseModal from '~/pages/educator/modals/update-course.vue'
